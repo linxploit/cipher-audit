@@ -8,7 +8,7 @@
  \____|___|_|   |_| |_|_____|_| \_\/_/   \_\___/|____/___| |_|
 ```
 
-### ✦ TLS Certificate & Protocol Security Inspector ✦
+### TLS Certificate & Protocol Security Inspector 
 
 **Reads what the handshake reveals. No MITM, no exploitation.**
 
