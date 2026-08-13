@@ -72,9 +72,6 @@ ORG = "Linxploit"
 SITE = "https://linxploit.com"
 PORTFOLIO = "https://linxploit.com/founder"
 
-# --------------------------------------------------------------------------- #
-#  UI toolkit
-# --------------------------------------------------------------------------- #
 
 GRADIENT = [
     "\033[38;5;22m", "\033[38;5;28m", "\033[38;5;34m", "\033[38;5;40m",
@@ -203,10 +200,6 @@ def hr(color=C_MUTE, width=70):
     print(color + BOX["h"] * width + RESET)
 
 
-# --------------------------------------------------------------------------- #
-#  Data model
-# --------------------------------------------------------------------------- #
-
 @dataclass
 class CertificateInfo:
     subject: Optional[str] = None
@@ -259,10 +252,6 @@ class ScanResult:
             return "INFO"
         return min(self.findings, key=lambda f: SEVERITY_ORDER.get(f.severity, 5)).severity
 
-
-# --------------------------------------------------------------------------- #
-#  Certificate retrieval & parsing
-# --------------------------------------------------------------------------- #
 
 def fetch_certificate_der(host: str, port: int, timeout: int) -> bytes:
     context = ssl.SSLContext(ssl.PROTOCOL_TLS_CLIENT)
@@ -353,10 +342,6 @@ def parse_certificate(der: bytes) -> CertificateInfo:
     return info
 
 
-# --------------------------------------------------------------------------- #
-#  Protocol support testing
-# --------------------------------------------------------------------------- #
-
 PROTOCOL_TEST_ORDER = ["SSLv3", "TLSv1.0", "TLSv1.1", "TLSv1.2", "TLSv1.3"]
 
 _PROTOCOL_TLS_VERSION = {
@@ -419,10 +404,6 @@ def check_protocol_support(host: str, port: int, timeout: int, skip_legacy: bool
     return results
 
 
-# --------------------------------------------------------------------------- #
-#  Security headers
-# --------------------------------------------------------------------------- #
-
 SECURITY_HEADER_NAMES = [
     "Strict-Transport-Security", "Content-Security-Policy", "X-Content-Type-Options",
     "X-Frame-Options", "Referrer-Policy", "Permissions-Policy",
@@ -438,10 +419,6 @@ def check_security_headers(host: str, port: int, timeout: int) -> Dict[str, Opti
     except Exception as e:  # noqa
         return {"_error": str(e)}
 
-
-# --------------------------------------------------------------------------- #
-#  Risk analysis
-# --------------------------------------------------------------------------- #
 
 WEAK_SIGNATURE_ALGOS = {"sha1", "md5", "md2"}
 
@@ -498,10 +475,6 @@ def analyze_findings(cert: Optional[CertificateInfo], protocols: Dict[str, Proto
     return findings
 
 
-# --------------------------------------------------------------------------- #
-#  Core scan
-# --------------------------------------------------------------------------- #
-
 def scan_target(host: str, port: int, timeout: int, skip_legacy: bool, check_headers: bool) -> ScanResult:
     result = ScanResult(host=host, port=port)
     start = time.perf_counter()
@@ -531,10 +504,6 @@ def scan_target(host: str, port: int, timeout: int, skip_legacy: bool, check_hea
     result.duration_s = round(time.perf_counter() - start, 2)
     return result
 
-
-# --------------------------------------------------------------------------- #
-#  Reporting
-# --------------------------------------------------------------------------- #
 
 def format_date(dt: Optional[datetime]) -> str:
     return dt.strftime("%Y-%m-%d %H:%M:%S UTC") if isinstance(dt, datetime) else "—"
@@ -655,11 +624,6 @@ def save_json(results: List[ScanResult], path: str):
     }
     with open(path, "w", encoding="utf-8") as f:
         json.dump(data, f, indent=2, default=str)
-
-
-# --------------------------------------------------------------------------- #
-#  CLI
-# --------------------------------------------------------------------------- #
 
 def parse_target(raw: str) -> Tuple[str, int]:
     raw = raw.strip()
