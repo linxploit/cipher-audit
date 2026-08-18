@@ -56,7 +56,7 @@ CipherAudit fixes this properly: it retrieves the raw certificate bytes (which a
 ## 📸 Preview
 
 ```
-✦ TLS Certificate & Protocol Security Inspector ✦
+ TLS Certificate & Protocol Security Inspector 
 
 [ TARGET: example.com:443 ]
 ────────────────────────────────────────────────────────────
