@@ -10,7 +10,7 @@
 CipherAudit — TLS Certificate & Protocol Security Inspector
 Made by Mindless — Founder & CEO of Linxploit
 https://linxploit.com | https://linxploit.com/founder
-aaaaaaaaa
+aaaaaaaaawdw
 WHAT THIS TOOL DOES:
     CipherAudit connects to a host over TLS — the same handshake any
     browser performs — reads the certificate it presents, checks which
